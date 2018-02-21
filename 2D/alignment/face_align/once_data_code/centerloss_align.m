@@ -1,6 +1,4 @@
-function centerloss_align(face_dir,ffp_dir,save_dir,file_filter,pts_format,is_continue)
-
-imgSize = [112, 96];
+function centerloss_align(face_dir,ffp_dir,save_dir,file_filter,pts_format,is_continue, is_train)
 
 subdir = dir(face_dir);
 subdir = subdir(3:end);
@@ -26,7 +24,7 @@ for i=1: length(subdir)
         end
         assert(logical(exist(ffp_fn, 'file')),'landmarks should be provided\n');
         try
-        [img_cropped, conf]=centerloss_align_single(img,ffp_fn);
+        [img_cropped, conf]=centerloss_align_single(img,ffp_fn, is_train);
         catch
             continue; 
         end

@@ -14,12 +14,13 @@ clear;
 face_dir='/home/idealsee/face_train_data_needed/SuZhou_major_se3k';
 ffp_dir=face_dir;
 save_dir='/home/idealsee/face_train_data_needed/sphere_se3k';
+is_train = 1; %% if true, get (112+6)x(96+6) size images, else 112x96
 
 % save_dir='/home/scw4750/github/IJCB2017/liangjie/croped/with_pts/enlarge_mulitpie_croped_by_liang_with_pts/gallery';
 pts_format='5pt';
 filter='*.jpg';
 is_continue=true; %when landmarks does not exist or is not correct,choose whether to continue;
-centerloss_align(face_dir, ffp_dir, save_dir,'*.jpg',pts_format,is_continue);
+centerloss_align(face_dir, ffp_dir, save_dir,'*.jpg',pts_format,is_continue, is_train);
 
 %algorithm:
 % First, this algorithm gets similarity transform matrix by the landmarks of a mean shape and the un-aligned image. 
