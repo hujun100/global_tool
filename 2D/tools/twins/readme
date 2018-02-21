@@ -1,0 +1,22 @@
+All codes:
+   To use twins to filter the ugly data.
+
+howsimilar_yc1.py: the original version from "Yan Chao"
+   input: 
+      face dataset path(the file structure of dataset path must be  'class/all_images')
+   output:
+      a series of txt file contains all the image-to-image similarity of one class.
+      The number of output txt is the same as the number of class under face dataset path
+      
+howsimilar_two_dir.py: 
+   input:
+      face dataset path(the file structure of dataset path must be  'class/all_images')
+   output:
+      a series of txt contains the class-to class similarity of all class
+
+howsimilar_two_dataset.py:
+   input:
+       Two face dataset path(the file structure of dataset path must be  'class/all_images')
+   output:
+       a series of txt when average similarity of two class are bigger than threshold
+

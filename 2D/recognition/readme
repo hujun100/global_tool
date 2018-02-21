@@ -1,0 +1,4 @@
+img_feature_map:
+    is a N*2 cell. The first column is the image name and the second is the feature
+railway_evaluation_v1: just for "21_CDWRWS_Passenger" without ID card
+railway_evaluation_v2: with ID card
