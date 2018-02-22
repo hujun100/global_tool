@@ -17,10 +17,10 @@ clear;clc;
 use_mtcnn_v1 = false; 
 
 is_use_relative_path=1;
-img_dir='/home/scw4750/Dataset/CASIA-WebFace';
+img_dir='/home/scw4750/Dataset/TaoGirls-3k';
 
 is_write_5pt = 1;
-list_txt = '/home/scw4750/Dataset/webface.txt';
+list_txt = '/home/scw4750/Dataset/tg3k.txt';
 
 is_save_mat = 0;
 mat_name = 'train-7k_lm_bbox_map.mat';

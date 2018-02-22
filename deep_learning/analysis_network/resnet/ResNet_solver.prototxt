@@ -1,0 +1,13 @@
+net: "train_file_v13/ResNet_lmdb.prototxt"
+test_iter: 300
+test_interval: 10000
+base_lr: 0.00000002
+display: 100
+max_iter: 15000000
+lr_policy: "fixed"
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 10000
+snapshot_prefix: "snapshot/v13/ResNet_"
+solver_mode: GPU
+#type: "Adam"
