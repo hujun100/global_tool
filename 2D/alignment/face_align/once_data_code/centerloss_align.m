@@ -15,6 +15,11 @@ for i=1: length(subdir)
     
     img_fns = dir([face_dir filesep subdir(i).name filesep file_filter]);
     for k=1: length(img_fns)
+        
+        save_fn = [save_dir filesep subdir(i).name filesep img_fns(k).name(1:end)];
+        if exist(save_fn, 'file')
+             continue;
+        end
         img = imread([face_dir filesep subdir(i).name filesep img_fns(k).name]);
         ffp_fn = [ffp_dir filesep subdir(i).name filesep img_fns(k).name(1:end) '.' pts_format];
         if is_continue
@@ -32,7 +37,6 @@ for i=1: length(subdir)
             continue;
         end
 
-        save_fn = [save_dir filesep subdir(i).name filesep img_fns(k).name(1:end)];
         imwrite(img_cropped, save_fn);
     end
 end

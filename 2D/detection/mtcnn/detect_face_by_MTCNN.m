@@ -17,10 +17,10 @@ clear;clc;
 use_mtcnn_v1 = false; 
 
 is_use_relative_path=1;
-img_dir='/home/scw4750/Dataset/TaoGirls-3k';
+img_dir='/home/scw4750/Dataset/CACD/CACD2000';
 
 is_write_5pt = 1;
-list_txt = '/home/scw4750/Dataset/tg3k.txt';
+list_txt = '/home/scw4750/Dataset/CACD/cacd2000_list.txt';
 
 is_save_mat = 0;
 mat_name = 'train-7k_lm_bbox_map.mat';
@@ -54,7 +54,7 @@ end
 
 
 %minimum size of face
-minsize=20;
+minsize=30;
 %use cpu
 %caffe.set_mode_cpu();
 gpu_id=0;
