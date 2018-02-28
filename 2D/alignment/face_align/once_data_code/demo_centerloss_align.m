@@ -11,9 +11,9 @@ clear;
 %         3. the images should be stored as  root_dir/class/image
 %Jun Hu
 %2017-4
-face_dir='/home/scw4750/Dataset/CACD/CACD2000Wrapper';
+face_dir='/home/brl/TRAIN/DataSet/CACD/DATA/wrapper2';
 ffp_dir=face_dir;
-save_dir='/home/scw4750/Dataset/CACD/AlignedCACD_128x102';
+save_dir='/home/brl/TRAIN/DataSet/CACD/DATA/AlignedCACD_VS';
 is_train = 1; %% if true, get (112+6)x(96+6) size images, else 112x96
 
 % save_dir='/home/scw4750/github/IJCB2017/liangjie/croped/with_pts/enlarge_mulitpie_croped_by_liang_with_pts/gallery';

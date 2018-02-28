@@ -1,6 +1,6 @@
 from __future__ import print_function
 import sys
-sys.path.insert(0, '/home/idealsee/github/caffe-windows-ms/python')
+sys.path.insert(0, '/home/brl/github/caffe-ms/python')
 from caffe import layers as L, params as P, to_proto
 from caffe.proto import caffe_pb2
 import caffe
@@ -165,13 +165,20 @@ class Spherenet(object):
         output = L.Eltwise(bottom, model, eltwise_param=dict(operation=1))
         return output
 
-    
+
+    def add_conv_bn_relu(self, bottom, num_output):
+        model = self.conv(bottom, num_output, wf = msra_constant)
+        model = L.BatchNorm(model, use_global_stats=False, in_place=True)
+        model = L.Scale(model, bias_term=True, in_place=True)
+        model = L.ReLU(model, in_place=True)
+
+        return model
 
     def build_convolution(self, bottom, num_output, num_block):
         model = self.conv_prelu(bottom, num_output, 3, 2, 1, True,wf=xavier_constant)
 
         for i in range(num_block):
-            model = self.add_block_se(model, num_output)
+            model = self.add_conv_bn_relu(model, num_output)
         return model
 
     def make_net(self, data_file, block_nums,  batch_size=128, feature_dim=512, class_num=17501):
@@ -223,7 +230,7 @@ def make_net():
 
     # make spherenet36
     with open('sphereface_model.prototxt', 'w') as f:
-        block_nums = [2, 4, 8, 2]
+        block_nums = [1, 2, 2, 6]
         print(str(model.make_net('/home/wangaodi/train_example/vgg+asia+se3k_redup.txt', block_nums, batch_size=100)), file=f)
 
 

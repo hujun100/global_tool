@@ -17,17 +17,17 @@ clear;clc;
 use_mtcnn_v1 = false; 
 
 is_use_relative_path=1;
-img_dir='/home/scw4750/Dataset/CACD/CACD2000';
+img_dir='/home/brl/TRAIN/DataSet/CACD/DATA/AlignedCACD_VS/CACD_VS';
 
 is_write_5pt = 1;
-list_txt = '/home/scw4750/Dataset/CACD/cacd2000_list.txt';
+list_txt = '/home/brl/TRAIN/DataSet/CACD/DATA/AlignedCACD_VS/cacd_vs_list.txt';
 
 is_save_mat = 0;
 mat_name = 'train-7k_lm_bbox_map.mat';
 
+caffe_path='/home/brl/github/caffe-ms/matlab';
+
 is_write_detected_face = false; %if true,you should change the code
-
-
 
 %% advanced parameters. If you want to know what it is, see codes
 is_square_bbox=0;
@@ -35,7 +35,7 @@ crop_factor=1;
 %%%%%%%%%%%%%%%%%%%
 
 %path of toolbox
-caffe_path='/home/scw4750/github/caffe-windows-ms/matlab';
+
 pdollar_toolbox_path='toolbox-master';
 addpath(genpath(caffe_path));
 addpath(genpath(pdollar_toolbox_path));

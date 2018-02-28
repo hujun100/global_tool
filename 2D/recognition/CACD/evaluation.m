@@ -1,4 +1,4 @@
-addpath(genpath('/home/idealsee/github/global_tool'));
+addpath(genpath('~/github/global_tool'));
 labels = [ones(200,1);zeros(200,1)];
 acc = zeros(10,1);
 for i = 1:10
