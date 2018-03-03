@@ -1,4 +1,4 @@
-function centerloss_align(face_dir,ffp_dir,save_dir,file_filter,pts_format,is_continue, is_train)
+function centerloss_align(face_dir,ffp_dir,save_dir,file_filter,pts_format,conf_threshold,is_continue, is_train)
 
 subdir = dir(face_dir);
 subdir = subdir(3:end);
@@ -33,7 +33,7 @@ for i=1: length(subdir)
         catch
             continue; 
         end
-        if conf< 0.9
+        if conf< conf_threshold
             continue;
         end
 
