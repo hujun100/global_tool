@@ -108,12 +108,18 @@ end
 
 %fprintf('img %s\n',[img_dir filesep img_file]);
 if norm_type==2
-    cropImg=imresize(img,img_size);
-    temp=cropImg;
-    if size(cropImg,3)==1
+    temp=img;
+    if size(img,3)==1
         cropImg(:,:,1)=temp;
         cropImg(:,:,2)=temp;
         cropImg(:,:,3)=temp;
+    else
+        cropImg = temp;
+    end
+    if sum(abs(size(cropImg) - [118, 102, 3])) == 0
+        cropImg = cropImg(3:114, 3:98,:);
+    else
+        cropImg=imresize(cropImg,img_size);
     end
     cropImg = single(cropImg);
     cropImg = (cropImg - 127.5)/128;
