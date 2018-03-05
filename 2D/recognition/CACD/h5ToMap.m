@@ -1,5 +1,5 @@
 clear;clc;
-h5_file = '/home/brl/PycharmProjects/crossAgeFR/cacd_features.h5';
+h5_file = '/home/brl/PycharmProjects/crossAgeFR/lfw.h5';
 all_names = h5read(h5_file,'/name');
 all_features = h5read(h5_file, '/feature');
 

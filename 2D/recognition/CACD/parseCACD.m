@@ -1,5 +1,5 @@
-data = importdata('/home/brl/TRAIN/DataSet/CACD/DATA/cleanedCACDList.txt');
-labeled_list = '/home/brl/TRAIN/DataSet/CACD/DATA/cleanedCACDList_with_label.txt';
+data = importdata('/home/brl/TRAIN/DataSet/CACD/DATA/cleanedTestImageOfCACD.txt');
+labeled_list = '/home/brl/TRAIN/DataSet/CACD/DATA/cleanedTestImageOfCACD_with_label.txt';
 
 data_len = length(data);
 all_names = cell(data_len, 1);

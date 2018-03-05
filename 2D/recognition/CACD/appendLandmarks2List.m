@@ -1,7 +1,7 @@
 addpath(genpath('~/github/global_tool'));
-data = importdata('/home/brl/PycharmProjects/crossAgeFR/lfw_evaluation/lfw_list.txt');
-data_dir = '/home/brl/PycharmProjects/crossAgeFR/lfw_evaluation/alignedLFW';
-out_ffp = '/home/brl/PycharmProjects/crossAgeFR/lfw_evaluation/lfw_list_with_lm.txt';
+data = importdata('/home/brl/TRAIN/DataSet/CACD/DATA/cleanedTestImageOfCACD_with_label.txt');
+data_dir = '/home/brl/TRAIN/DataSet/CACD/DATA/AlignedCACD/CACD2000CleanedDuplicateAndTestImages';
+out_ffp = '/home/brl/TRAIN/DataSet/CACD/DATA/cleanedTestImageOfCACD_with_label_lm.txt';
 all_paths = data.textdata;
 all_labels = data.data;
 fid = fopen(out_ffp, 'wt');
@@ -20,14 +20,15 @@ for i = 1:length(all_paths)
             lm(1,1),lm(1,2),lm(2,1),lm(2,2),lm(3,1),lm(3,2),lm(4,1),lm(4,2),...
             lm(5,1),lm(1,2));
     else
-        fprintf('some images you should take care of. continue?');
-        pause;
-        lm = [30.2946, 65.5318, 48.0252, 33.5493, 62.7299; ...
-            51.6963, 51.5014, 71.7366, 92.3655, 92.2041]' + 3;
-        lm = int8(lm);
-        fprintf(fid, '%s %d %d %d %d %d %d %d %d %d %d %d\n', path, all_labels(i),...
-            lm(1,1),lm(1,2),lm(2,1),lm(2,2),lm(3,1),lm(3,2),lm(4,1),lm(4,2),...
-            lm(5,1),lm(1,2));
+        %%% for test images which must be processed
+%         fprintf('some images you should take care of. continue?');
+%         pause;
+%         lm = [30.2946, 65.5318, 48.0252, 33.5493, 62.7299; ...
+%             51.6963, 51.5014, 71.7366, 92.3655, 92.2041]' + 3;
+%         lm = int8(lm);
+%         fprintf(fid, '%s %d %d %d %d %d %d %d %d %d %d %d\n', path, all_labels(i),...
+%             lm(1,1),lm(1,2),lm(2,1),lm(2,2),lm(3,1),lm(3,2),lm(4,1),lm(4,2),...
+%             lm(5,1),lm(1,2));
     end
 end
 fclose(fid);
