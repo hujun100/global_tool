@@ -45,32 +45,32 @@ if strcmp(distance_type,'cos')
     return;
 end
 
-%%%% old version to comptue analysis matrix 
-for i_p=1:length(probe)
-    fprintf('get_analysis matrix i_p:%d\n',i_p);
-    for i_g=1:length(gallery)
-        if strcmp(distance_type,'cos')
-            result(i_g).score=compute_cosine_score(gallery(i_g).fea,probe(i_p).fea);
-        else
-            result(i_g).score=pdist2(gallery(i_g).fea',probe(i_p).fea');
-        end
-        analysis.distance_matrix(i_p,i_g)=result(i_g).score;
-        if isfield(gallery,'name')
-            analysis.gallery_info(i_g).name=gallery(i_g).name;
-        end
-        analysis.gallery_info(i_g).label=gallery(i_g).label;
-        if isfield(probe, 'name')
-            analysis.probe_info(i_p).name=probe(i_p).name;
-        end
-        analysis.probe_info(i_p).label=probe(i_p).label;
-    end
-    
-    if strcmp(distance_type,'cos')
-        [sort_score,index]=sort([result.score],'descend');
-    else
-        [sort_score,index]=sort([result.score]);
-    end
-    analysis.sort_matrix(i_p,:)=index;
-end
+% %%%% old version to comptue analysis matrix 
+% for i_p=1:length(probe)
+%     fprintf('get_analysis matrix i_p:%d\n',i_p);
+%     for i_g=1:length(gallery)
+%         if strcmp(distance_type,'cos')
+%             result(i_g).score=compute_cosine_score(gallery(i_g).fea,probe(i_p).fea);
+%         else
+%             result(i_g).score=pdist2(gallery(i_g).fea',probe(i_p).fea');
+%         end
+%         analysis.distance_matrix(i_p,i_g)=result(i_g).score;
+%         if isfield(gallery,'name')
+%             analysis.gallery_info(i_g).name=gallery(i_g).name;
+%         end
+%         analysis.gallery_info(i_g).label=gallery(i_g).label;
+%         if isfield(probe, 'name')
+%             analysis.probe_info(i_p).name=probe(i_p).name;
+%         end
+%         analysis.probe_info(i_p).label=probe(i_p).label;
+%     end
+%     
+%     if strcmp(distance_type,'cos')
+%         [sort_score,index]=sort([result.score],'descend');
+%     else
+%         [sort_score,index]=sort([result.score]);
+%     end
+%     analysis.sort_matrix(i_p,:)=index;
+% end
 
 end

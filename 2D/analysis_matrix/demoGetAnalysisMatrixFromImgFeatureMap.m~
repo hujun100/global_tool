@@ -1,0 +1,35 @@
+clear;
+addpath(genpath('~/github/global_tool'));
+
+rank_n=50;
+
+probe_txt='/home/scw4750/BRL/LJ/lightcnn/lightcnn3_probe.txt';
+gallery_txt='/home/scw4750/BRL/LJ/lightcnn/lightcnn3_gallery.txt';
+featureDim = 512;
+
+gallery = get_name_label_by_txt(gallery_txt);
+probe = get_name_label_by_txt(probe_txt);
+galLen = length(gallery);
+proLen = length(probe);
+
+allGalFeatures = zeros(featureDim, galLen);
+allProFeatures(proLen, featureDim);
+
+for i = 1:galLen
+    allGalFeatures(:,i) = img_features_map(gallery(i).name); 
+end
+
+analysis = get_analysis_matrix_from_net(gallery_dir,probe_dir,...
+    gallery_txt,probe_txt,caffe_path,prototxt,caffemodel, ...
+    net_param,preprocess_param,matrix_param);
+
+
+function result=get_name_label_by_txt(txt)
+fid=fopen(txt,'rt');
+list=textscan(fid,'%s %f');
+fclose(fid);
+for i_g=1:length(list{1})
+    result(i_g).name=list{1,1}{i_g};
+    result(i_g).label=list{1,2}(i_g);
+end
+end

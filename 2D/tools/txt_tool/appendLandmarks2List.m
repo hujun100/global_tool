@@ -1,7 +1,7 @@
 addpath(genpath('~/github/global_tool'));
-data = importdata('/home/brl/TRAIN/DataSet/CACD/DATA/cleanedTestImageOfCACD_with_label.txt');
-data_dir = '/home/brl/TRAIN/DataSet/CACD/DATA/AlignedCACD/CACD2000CleanedDuplicateAndTestImages';
-out_ffp = '/home/brl/TRAIN/DataSet/CACD/DATA/cleanedTestImageOfCACD_with_label_lm.txt';
+data = importdata('/home/brl/TRAIN/DataSet/morph2_complete/testList.txt');
+data_dir = '/home/brl/TRAIN/DataSet/morph2_complete/alignedTestList';
+out_ffp = '/home/brl/TRAIN/DataSet/morph2_complete/testListWithLandmarks.txt';
 all_paths = data.textdata;
 all_labels = data.data;
 fid = fopen(out_ffp, 'wt');

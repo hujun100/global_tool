@@ -1,5 +1,5 @@
 clear;clc;
-h5_file = '/home/brl/PycharmProjects/crossAgeFR/lfw.h5';
+h5_file = '/home/brl/PycharmProjects/crossAgeFR/morph.h5';
 all_names = h5read(h5_file,'/name');
 all_features = h5read(h5_file, '/feature');
 
@@ -12,9 +12,11 @@ img_feature_map = containers.Map();
 for i = 1:length(all_names)
     i
     name = all_names{i};
-    idx = strfind(name, '.');
-    name = name(idx-6:idx+3);
+    idx = strfind(name, '/');
+    idx2 = strfind(name, '.');
+    name = name(idx(end-1)+1:idx2+3);
     feature = all_features(:,i);
+    feature = feature/norm(feature);
 %     feature = [0.25*all_features(:,i)/norm(all_features(:,i));all_features_v2(:,i)/norm(all_features_v2(:,i))];
     img_feature_map(name) = feature;
 end

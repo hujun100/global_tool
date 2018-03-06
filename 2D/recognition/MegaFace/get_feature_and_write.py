@@ -48,7 +48,7 @@ caffe.set_mode_gpu()
 def save_feature_mat(output_root_dir, img_root_dir, ffp, net, type=1):
     with open(ffp,'rt') as f:
         all_lines = f.readlines()
-    for idx in range(0, len(all_lines)):
+    for idx in range(84290, len(all_lines)):
         iterm=all_lines[idx]
         iterm=iterm.strip('\r\n')
         img_file = img_root_dir+iterm
@@ -79,10 +79,10 @@ if  __name__ == '__main__':
     caffemodel='/media/brl/30AA83A3AA836466/best_result/v90/sphereface_model_iter_230000.caffemodel';
     net=caffe.Net(prototxt,caffemodel,caffe.TEST)
 
-    ffp = '/media/brl/30AA83A3AA836466/facescrub.txt'
-    img_root_dir = '/media/brl/30AA83A3AA836466/finalFacescrub/'
-    output_root_dir = '/media/brl/30AA83A3AA836466/features/facescrub/'
-    save_feature_mat(output_root_dir, img_root_dir, ffp, net, 1)
+    #ffp = '/media/brl/30AA83A3AA836466/facescrub.txt'
+    #img_root_dir = '/media/brl/30AA83A3AA836466/finalFacescrub/'
+    #output_root_dir = '/media/brl/30AA83A3AA836466/features/facescrub/'
+    #save_feature_mat(output_root_dir, img_root_dir, ffp, net, 1)
 
     ffp = '/media/brl/30AA83A3AA836466/distractor_1m.txt'
     img_root_dir = '/media/brl/30AA83A3AA836466/alignedFlick/' 

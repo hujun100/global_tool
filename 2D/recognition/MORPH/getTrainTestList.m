@@ -30,9 +30,10 @@ for i = 1:length(uClass)
             allAge(i_a) = str2num(path(end-5:end-4));
         end
         [~,idx] = max(allAge);
-        fprintf(fidPro,'%s\n', allPaths{idx});
+        fprintf(fidPro,'%s %d\n', allPaths{idx}, testCount);
+        allAge(idx) = Inf;
         [~,idx] = min(allAge);
-        fprintf(fidGal,'%s\n', allPaths{idx});
+        fprintf(fidGal,'%s %d\n', allPaths{idx}, testCount);
         testCount = testCount + 1;
     else
         for i_a = 1:allPathsLen
