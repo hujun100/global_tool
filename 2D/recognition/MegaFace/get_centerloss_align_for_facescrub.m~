@@ -1,8 +1,12 @@
+%%prerequisite:
+%%               image_name_txt which contains all the images name
+%%               serveral containers.map which contains the corresponding bbox of image in img_name_txt
 %%
-% addpath(genpath('~/github/global_tool'));
-% data =importdata('/home/brl/TRAIN/facescrub.txt');
-% root_dir = '/home/brl/TRAIN/downloaded/';
-% output_dir = '/home/brl/TRAIN/alignedFacescrub/';
+%%
+addpath(genpath('~/github/global_tool'));
+data =importdata('/home/brl/TRAIN/facescrub.txt');
+root_dir = '/home/brl/TRAIN/downloaded/';
+output_dir = '/home/brl/TRAIN/alignedFacescrub/';
 failedDetect = importdata('/home/brl/github/global_tool/2D/detection/mtcnn/failedDecect.txt');
 fid = fopen('/home/brl/TRAIN/downloaded/needDealMannual_list.txt','wt');
 for i_d = 1:length(data)
@@ -40,6 +44,22 @@ for i_d = 1:length(data)
 end
 fclose(fid);
 
+
+for i = 1:length(failedDetect)
+   path = failedDetect{i};
+   index = find(strcmp(data, path));
+   lastPath = data{index-1};
+   nextPath = data{index+1};
+   if strcmp(lastPath(1:10), path(1:10))
+       last = fullfile(output_dir, lastPath)
+       while exist(last, 'file')
+           
+       end
+       copyfile(, fullfile(output_dir, path));
+   else
+       copyfile(fullfile(output_dir, nextPath), fullfile(output_dir, path));
+   end
+end
 
 function outImg = exceptionDeal(img)
 

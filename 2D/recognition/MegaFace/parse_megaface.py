@@ -50,7 +50,7 @@ def parse_json_lm(all_lines, img_dir, key):
     print('end')   
 
 if __name__ == '__main__':
-    ffp='/media/scw4750/pipa_IDcard/megaface/devkit/templatelists/facescrub_uncropped_features_list.json'
+    ffp='/home/brl/TRAIN/devkit/templatelists/facescrub_uncropped_features_list.json'
     output_ffp = 'faces.txt'
     key = 'path'
     parse_json(output_ffp,ffp,key)

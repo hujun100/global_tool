@@ -21,10 +21,7 @@ img_dir='/home/brl/TRAIN/downloaded/';
 
 is_write_5pt = 1;
 list_txt = '/home/brl/TRAIN/facescrub.txt';
-
-is_save_mat = 0;
-mat_name = 'train-7k_lm_bbox_map.mat';
-
+failedDetect = 'failedDecect.txt';
 caffe_path='/home/brl/github/caffe-ms/matlab';
 
 is_write_detected_face = false; %if true,you should change the code
@@ -91,6 +88,8 @@ imglist=importdata(list_txt);
 if isfield(imglist,'textdata')
     imglist = imglist.textdata;
 end
+fid = fopen(failedDetect,'wt');
+
 for i=1:length(imglist)
     i
     if is_use_relative_path
@@ -133,6 +132,7 @@ for i=1:length(imglist)
     catch
         error_img(length(error_img)+1).name=imglist{i};
         %         delete(imglist{i});
+        fprintf(fid,'%s\n', imglist{i});
         continue;
     end
     %     we recommend you to set minsize as x * short side
@@ -162,27 +162,15 @@ for i=1:length(imglist)
     elseif size(bboxes, 1)==1
         bbox = bboxes;
         points = landmarks;
+        if is_write_5pt
+            write_5pt(name, bbox, points);
+        end
     else
+        fprintf(fid,'%s\n', imglist{i});
         continue;
     end
-    
-    
-    %% write landmarks to file(.5pt)
-    if is_write_5pt
-        write_5pt(name, bbox, points);
-    end
-    
-    if is_save_mat
-        %          if is_use_relative_path
-        %              name = imglist{i};
-        %          end
-        name_lm_map(name) = points;
-        name_bbox_map(name) = bbox;
-    end
 end
-
-save(mat_name,'name_lm_map','name_bbox_map');
-
+fclose(fid);
 fprintf('error images number:%d\n',length(error_img));
 caffe.reset_all();
 

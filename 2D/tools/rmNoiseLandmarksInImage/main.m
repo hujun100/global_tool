@@ -1,5 +1,5 @@
 addpath(genpath('~/github/global_tool'));
-caffe_path='~/github/caffe-windows-ms/matlab';
+caffe_path='/home/brl/github/caffe-ms/matlab';
 addpath(caffe_path);
 img_dir = '/home/brl/TRAIN/DataSet/CACD/DATA/AlignedCACD_VS/CACD_VS/';
 all_imgs_ffp = '/home/brl/TRAIN/DataSet/CACD/DATA/AlignedCACD_VS/cacd_vs_list.txt';
@@ -30,8 +30,8 @@ allClass = cell(allImgLen, 1);
 allFeatures = zeros(allImgLen, featureDim);
 % allImgLen = 200; %%for test
 for i = 1:allImgLen
-    if mod(i, 1000) ==0
-        fprintf('first i:%d',i);
+    if mod(i, 1000) ==1
+        fprintf('first i:%d\n',i);
     end
     imgPath = allImgPaths{i};
     class = regexp(imgPath, filesep, 'split');
@@ -63,8 +63,8 @@ for i_u = 1:length(uAllClass)
 end
 
 for i = 1:allImgLen
-    if mod(i, 1000) ==0
-        fprintf('second i:%d',i);
+    if mod(i, 1000) ==1
+        fprintf('second i:%d\n',i);
     end
     imgPath = allImgPaths{i};
     class = regexp(imgPath, filesep, 'split');

@@ -35,7 +35,7 @@ def get_feature_vgg(net,img):
     return feature/np.linalg.norm(feature)
 
 
-caffe_root = '/home/scw4750/github/caffe'
+caffe_root = '/home/brl/github/caffe-ms'
 import os
 import sys
 sys.path.insert(0,caffe_root+os.path.sep+'python')
@@ -50,7 +50,7 @@ def save_feature_mat(output_root_dir, img_root_dir, ffp, net, type=1):
         all_lines = f.readlines()
     for idx in range(0, len(all_lines)):
         iterm=all_lines[idx]
-        iterm=iterm.strip('\n')
+        iterm=iterm.strip('\r\n')
         img_file = img_root_dir+iterm
         begin_time = time.time()
         img = cv2.imread(img_file)
@@ -65,32 +65,28 @@ def save_feature_mat(output_root_dir, img_root_dir, ffp, net, type=1):
         #feature_copy = np.concatenate((feature, np.zeros([3072,1], dtype=np.float32))).copy()    
         feature_copy = feature.copy()       
         output_file = output_root_dir+iterm+'.bin'
-        output_dir = output_root_dir + iterm.split('/')[0]
+        output_dir = output_root_dir + '/'.join(iterm.split('/')[0:-1])
         if os.path.exists(output_dir) is False:
-            os.mkdir(output_dir)
-        output_dir = output_root_dir + iterm.split('/')[0]+ os.path.sep + iterm.split('/')[1]
-        if os.path.exists(output_dir) is False:
-            os.mkdir(output_dir)
+            os.makedirs(output_dir)
+        #output_dir = output_root_dir + iterm.split('/')[0]+ os.path.sep + iterm.split('/')[1]
+        #if os.path.exists(output_dir) is False:
+        #    os.mkdir(output_dir)
         #print(feature.shape)
         matio.save_mat(output_file,feature_copy)
     
 if  __name__ == '__main__':
-    #prototxt='/home/scw4750/github/2D/2D_models/vggFace/VGG_FACE_deploy.prototxt';
-    #caffemodel='/media/scw4750/pipa_IDcard/megaface/best_caffemodel/lvgg_iter_195000.caffemodel'
-    #prototxt='/home/scw4750/webface_sphereface/train_file_v13/sphereface_deploy.prototx
-    prototxt='/home/scw4750/webface_sphereface/train_file_v14/sphereface_deploy.prototxt'
-    caffemodel='/home/scw4750/webface_sphereface/snapshot/v14/sphereface_model_iter_82000.caffemodel';
-    #caffemodel='/home/scw4750/webface_sphereface/sphereface_model.caffemodel'
+    prototxt='/media/brl/30AA83A3AA836466/best_result/train_file_v82/sphereface_deploy.prototxt'
+    caffemodel='/media/brl/30AA83A3AA836466/best_result/v90/sphereface_model_iter_230000.caffemodel';
     net=caffe.Net(prototxt,caffemodel,caffe.TEST)
 
-    ffp = 'faceScrub.txt'
-    img_root_dir = '/media/scw4750/pipa_IDcard/megaface/centerloss_FaceScrub/'
-    output_root_dir = '/media/scw4750/pipa_IDcard/megaface/feature_FaceScrub/'
+    ffp = '/media/brl/30AA83A3AA836466/facescrub.txt'
+    img_root_dir = '/media/brl/30AA83A3AA836466/finalFacescrub/'
+    output_root_dir = '/media/brl/30AA83A3AA836466/features/facescrub/'
     save_feature_mat(output_root_dir, img_root_dir, ffp, net, 1)
 
-    ffp = 'distractor_10k.txt'
-    img_root_dir = '/media/scw4750/pipa_IDcard/megaface/centerloss_distractor_1m/' 
-    output_root_dir = '/media/scw4750/pipa_IDcard/megaface/feature_distractor/' 
+    ffp = '/media/brl/30AA83A3AA836466/distractor_1m.txt'
+    img_root_dir = '/media/brl/30AA83A3AA836466/alignedFlick/' 
+    output_root_dir = '/media/brl/30AA83A3AA836466/features/distractor/' 
     save_feature_mat(output_root_dir, img_root_dir, ffp, net, 1)
 
 
