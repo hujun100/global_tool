@@ -18,13 +18,35 @@ def preprocess_img_centerloss(img):
     img = np.transpose(img,[2,0,1])
     return img
 
-def get_feature_centerloss(net,img):
+def get_feature_centerloss_net1(net,img):
     net.blobs['data'].data[0,:]=img
     net.forward()
     feature1=net.blobs['fc5'].data.transpose()
     net.blobs['data'].data[0,:]=img[:,:,::-1]
     net.forward()
     feature2=net.blobs['fc5'].data.transpose()
+    feature = np.concatenate((feature1,feature2))
+    return feature/np.linalg.norm(feature)
+
+
+def get_feature_centerloss_net2(net,img):
+    net.blobs['data'].data[0,:]=img
+    net.forward()
+    feature1=net.blobs['InnerProduct1'].data.transpose()
+    net.blobs['data'].data[0,:]=img[:,:,::-1]
+    net.forward()
+    feature2=net.blobs['InnerProduct1'].data.transpose()
+    feature = np.concatenate((feature1,feature2))
+    return feature/np.linalg.norm(feature)
+
+
+def get_feature_centerloss_net3(net,img):
+    net.blobs['data'].data[0,:]=img
+    net.forward()
+    feature1=net.blobs['InnerProduct1'].data.transpose()
+    net.blobs['data'].data[0,:]=img[:,:,::-1]
+    net.forward()
+    feature2=net.blobs['InnerProduct1'].data.transpose()
     feature = np.concatenate((feature1,feature2))
     return feature/np.linalg.norm(feature)
 
@@ -45,7 +67,7 @@ caffe.set_device(0)
 caffe.set_mode_gpu()
 ### type == 0 means getting feature by vgg
 ### type == 1 means getting feature by sphereface
-def save_feature_mat(output_root_dir, img_root_dir, ffp, net, type=1):
+def save_ensemble_feature_mat(output_root_dir, img_root_dir, ffp, net1, net2, net3, type=1):
     with open(ffp,'rt') as f:
         all_lines = f.readlines()
     totalTime = time.time()
@@ -61,7 +83,14 @@ def save_feature_mat(output_root_dir, img_root_dir, ffp, net, type=1):
             feature = get_feature_vgg(net,img)
         else:
             img = preprocess_img_centerloss(img)
-            feature = get_feature_centerloss(net,img)  
+            feature1 = get_feature_centerloss_net1(net1,img)
+            feature1 = feature1/np.linalg.norm(feature1)
+            feature2 = get_feature_centerloss_net2(net3,img)
+            feature2 = feature2/np.linalg.norm(feature2)
+            feature3 = get_feature_centerloss_net3(net3,img)
+            feature3 = feature3/np.linalg.norm(feature3)
+            feature = np.concatenate([feature1, feature2])
+            feature = np.concatenate([feature, feature3])
         #feature_copy = np.concatenate((feature, np.zeros([3072,1], dtype=np.float32))).copy()    
         feature_copy = feature.copy()       
         output_file = output_root_dir+iterm+'.bin'
@@ -80,16 +109,24 @@ def save_feature_mat(output_root_dir, img_root_dir, ffp, net, type=1):
 if  __name__ == '__main__':
     prototxt='/home/brl/TRAIN/best_result/train_file_v82/sphereface_deploy.prototxt'
     caffemodel='/home/brl/TRAIN/best_result/v90/sphereface_model_iter_230000.caffemodel';
-    net=caffe.Net(prototxt,caffemodel,caffe.TEST)
+    net1=caffe.Net(prototxt,caffemodel,caffe.TEST)
 
-    #ffp = '/home/brl/Megaface/facescrub.txt'
-    #img_root_dir = '/home/brl/finalFacescrub/'
-    #output_root_dir = '/home/brl/Megaface/feature/facescrub/'
-    #save_feature_mat(output_root_dir, img_root_dir, ffp, net, 1)
+    prototxt='/home/brl/TRAIN/best_result/train_file_v95/sphereface_deploy.prototxt'
+    caffemodel='/home/brl/TRAIN/best_result/v95/sphereface_model_iter_220000.caffemodel';
+    net2=caffe.Net(prototxt,caffemodel,caffe.TEST)
+
+    prototxt='/home/brl/TRAIN/best_result/train_file_v96/sphereface_deploy.prototxt'
+    caffemodel='/home/brl/TRAIN/best_result/v96/sphereface_model_iter_220000.caffemodel';
+    net3=caffe.Net(prototxt,caffemodel,caffe.TEST)
+
+    ffp = '/home/brl/Megaface/facescrub.txt'
+    img_root_dir = '/home/brl/finalFacescrub/'
+    output_root_dir = '/home/brl/Megaface/featureEnsemble/facescrub/'
+    save_ensemble_feature_mat(output_root_dir, img_root_dir, ffp, net1, net2, net3, 1)
 
     ffp = '/home/brl/Megaface/distractor_1m.txt'
     img_root_dir = '/home/brl/alignedFlick/' 
-    output_root_dir = '/home/brl/Megaface/feature/distractor/' 
-    save_feature_mat(output_root_dir, img_root_dir, ffp, net, 1)
+    output_root_dir = '/home/brl/Megaface/featureEnsemble/distractor/' 
+    save_ensemble_feature_mat(output_root_dir, img_root_dir, ffp, net1, net2, net3, 1)
 
 
