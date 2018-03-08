@@ -118,11 +118,17 @@ def main(args):
 
   i=0
   nrof_noises = 0
-  for line in open(args.megaface_lst, 'r'):
+  with open(args.megaface_lst, 'r') as f:
+      allLines = f.readlines()
+  #allLines = allLines[729000:]
+  for idx, line  in enumerate(allLines):
     if i%1000==0:
       print("reading mf",i)
     i+=1
-    image_path, label, bbox, landmark = face_preprocess.parse_lst_line(line)
+    try:
+        image_path, label, bbox, landmark = face_preprocess.parse_lst_line(line)
+    except: 
+        print('error path index:%d\n'%(idx))
     _path = image_path.split('/')
     a1, a2, b = _path[-3], _path[-2], _path[-1]
     feature_path = os.path.join(args.megaface_feature_dir, a1, a2, "%s%s"%(b, args.suffix))
@@ -143,7 +149,7 @@ def main(args):
       #print('n', bb)
       #write_bin(feature_path_out, g)
       nrof_noises+=1
-  print(nrof_noises)
+  print('class number:%d'%(nrof_noises))
 
 
 def parse_arguments(argv):

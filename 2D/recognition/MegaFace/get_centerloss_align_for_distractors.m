@@ -1,7 +1,7 @@
-addpath(genpath('H:/global_tool'));
-data = importdata('H:/distractor_1m.txt');
-des_dir = 'H:/alignedFlick/';
-source_dir = 'H:/FlickrFinal2/';
+addpath(genpath('/home/brl/github/global_tool'));
+data = importdata('/home/brl/Megaface/distractor_1m.txt');
+des_dir = '/media/brl/30AA83A3AA836466/alignedFlick3pt/';
+source_dir = '/media/brl/30AA83A3AA836466/FlickrFinal2/';
 for i = 1:length(data)
     i
     img_name = data{i};

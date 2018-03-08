@@ -1,7 +1,0 @@
-data = importdata('/home/brl/Megaface/facescrub.txt');
-
-for i = 1:length(data)
-    path = data{i};
-    idx = strfind(path, '/');
-    class = path(1:20);
-end

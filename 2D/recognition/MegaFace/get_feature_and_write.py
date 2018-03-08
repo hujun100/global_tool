@@ -21,10 +21,10 @@ def preprocess_img_centerloss(img):
 def get_feature_centerloss(net,img):
     net.blobs['data'].data[0,:]=img
     net.forward()
-    feature1=net.blobs['fc5'].data.transpose()
+    feature1=net.blobs['fc1'].data.transpose()
     net.blobs['data'].data[0,:]=img[:,:,::-1]
     net.forward()
-    feature2=net.blobs['fc5'].data.transpose()
+    feature2=net.blobs['fc1'].data.transpose()
     feature = np.concatenate((feature1,feature2))
     return feature/np.linalg.norm(feature)
 
@@ -54,7 +54,8 @@ def save_feature_mat(output_root_dir, img_root_dir, ffp, net, type=1):
         iterm=all_lines[idx]
         iterm=iterm.strip('\r\n')
         img_file = img_root_dir+iterm
-        img = cv2.imread(img_file)
+        img = np.zeros([112,112,3])
+        img[:,8:104,:] = cv2.imread(img_file)
         #print('idx:%d  iterm:%s'%(idx, img_root_dir + iterm))
         if type == 0:
             img = preprocess_img_vgg(img)
@@ -78,14 +79,14 @@ def save_feature_mat(output_root_dir, img_root_dir, ffp, net, type=1):
             begin_time = time.time()
             
 if  __name__ == '__main__':
-    prototxt='/home/brl/TRAIN/best_result/train_file_v82/sphereface_deploy.prototxt'
-    caffemodel='/home/brl/TRAIN/best_result/v90/sphereface_model_iter_230000.caffemodel';
+    prototxt='/home/brl/Megaface/caffe-r34-amf/model.prototxt'
+    caffemodel='/home/brl/Megaface/caffe-r34-amf/model.caffemodel';
     net=caffe.Net(prototxt,caffemodel,caffe.TEST)
 
-    #ffp = '/home/brl/Megaface/facescrub.txt'
-    #img_root_dir = '/home/brl/finalFacescrub/'
-    #output_root_dir = '/home/brl/Megaface/feature/facescrub/'
-    #save_feature_mat(output_root_dir, img_root_dir, ffp, net, 1)
+    ffp = '/home/brl/Megaface/facescrub.txt'
+    img_root_dir = '/home/brl/finalFacescrub/'
+    output_root_dir = '/home/brl/Megaface/feature/facescrub/'
+    save_feature_mat(output_root_dir, img_root_dir, ffp, net, 1)
 
     ffp = '/home/brl/Megaface/distractor_1m.txt'
     img_root_dir = '/home/brl/alignedFlick/' 

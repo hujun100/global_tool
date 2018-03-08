@@ -72,7 +72,7 @@ def save_ensemble_feature_mat(output_root_dir, img_root_dir, ffp, net1, net2, ne
         all_lines = f.readlines()
     totalTime = time.time()
     begin_time = time.time()
-    for idx in range(0, len(all_lines)):
+    for idx in range(60000, len(all_lines)):
         iterm=all_lines[idx]
         iterm=iterm.strip('\r\n')
         img_file = img_root_dir+iterm
@@ -84,13 +84,10 @@ def save_ensemble_feature_mat(output_root_dir, img_root_dir, ffp, net1, net2, ne
         else:
             img = preprocess_img_centerloss(img)
             feature1 = get_feature_centerloss_net1(net1,img)
-            feature1 = feature1/np.linalg.norm(feature1)
-            feature2 = get_feature_centerloss_net2(net3,img)
-            feature2 = feature2/np.linalg.norm(feature2)
+            feature2 = get_feature_centerloss_net2(net2,img)
             feature3 = get_feature_centerloss_net3(net3,img)
-            feature3 = feature3/np.linalg.norm(feature3)
-            feature = np.concatenate([feature1, feature2])
-            feature = np.concatenate([feature, feature3])
+            feature = np.concatenate([feature1, feature2, feature3])
+            feature = feature/np.linalg.norm(feature)
         #feature_copy = np.concatenate((feature, np.zeros([3072,1], dtype=np.float32))).copy()    
         feature_copy = feature.copy()       
         output_file = output_root_dir+iterm+'.bin'
