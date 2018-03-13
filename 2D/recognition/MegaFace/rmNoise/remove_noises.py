@@ -21,7 +21,7 @@ import face_preprocess
 from sklearn.preprocessing import normalize
 
 
-feature_dim = 1024
+feature_dim = 1024*3
 feature_ext = 1
 
 def load_bin(path, fill = 0.0):
@@ -161,8 +161,8 @@ def parse_arguments(argv):
   parser.add_argument('--algo', type=str, help='', default='')
   parser.add_argument('--megaface-lst', type=str, help='', default='/home/brl/Megaface/distractor_1mWithLabel.txt')
   parser.add_argument('--facescrub-lst', type=str, help='', default='/home/brl/Megaface/facescrubWithLabel.txt')
-  parser.add_argument('--megaface-feature-dir', type=str, help='', default='/home/brl/Megaface/feature/distractor')
-  parser.add_argument('--facescrub-feature-dir', type=str, help='', default='/home/brl/Megaface/feature/facescrub')
+  parser.add_argument('--megaface-feature-dir', type=str, help='', default='/home/brl/Megaface/featureEnsemble/distractor')
+  parser.add_argument('--facescrub-feature-dir', type=str, help='', default='/home/brl/Megaface/featureEnsemble/facescrub')
   #parser.add_argument('--megaface-feature-dir-out', type=str, help='', default='/raid5data/dplearn/megaface/MegaFace_Features_cm')
   #parser.add_argument('--facescrub-feature-dir-out', type=str, help='', default='/raid5data/dplearn/megaface/FaceScrub_Features_cm')
   parser.add_argument('--megaface-feature-dir-out', type=str, help='', default='/home/brl/Megaface/cleanedFeature/distractor')

@@ -118,6 +118,10 @@ if norm_type==2
     end
     if sum(abs(size(cropImg) - [118, 102, 3])) == 0
         cropImg = cropImg(3:114, 3:98,:);
+    elseif sum(abs(img_size - [112, 112])) == 0
+        temp = zeros([112,112,3]);
+        temp(:, 8:8+95,:) = cropImg;
+        cropImg = temp;
     else
         cropImg=imresize(cropImg,img_size);
     end
