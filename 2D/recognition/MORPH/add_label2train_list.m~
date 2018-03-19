@@ -1,0 +1,10 @@
+clear;clc;
+data = importdata('/home/brl/TRAIN/DataSet/cacd_and_morph/trainList.txt');
+fid = fopen('/home/brl/TRAIN/DataSet/cacd_and_morph/trainList_with_label_age.txt', 'wt');
+begin_class_label = 1
+for i = 1:length(data)
+    path = data{i};
+    
+end
+
+fclose(fid);

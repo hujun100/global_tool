@@ -13,7 +13,7 @@ clear;
 %2017-4
 face_dir='/home/brl/TRAIN/DataSet/morph2_complete/classPerFoler';
 ffp_dir=face_dir;
-save_dir='/home/brl/TRAIN/DataSet/morph2_complete/alignedTestList';
+save_dir='/home/brl/TRAIN/DataSet/morph2_complete/alignedTrainList';
 is_train = 1; %% if true, get (112+6)x(96+6) size images, else 112x96
 conf_threshold = 0;
 % save_dir='/home/scw4750/github/IJCB2017/liangjie/croped/with_pts/enlarge_mulitpie_croped_by_liang_with_pts/gallery';

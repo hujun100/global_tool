@@ -15,7 +15,7 @@
 clear;clc;close all;
 test_data_dir = '/home/brl/PycharmProjects/crossAgeFR/lfw_evaluation/alignedLFW';
 
-h5_file = '/home/brl/PycharmProjects/crossAgeFR/lfw.h5';
+h5_file = '/home/brl/PycharmProjects/crossAgeFR/reproductAE-CNN/lfw.h5';
 all_names = h5read(h5_file,'/name');
 all_features = h5read(h5_file,'/feature');
 for i = 1:length(all_names)

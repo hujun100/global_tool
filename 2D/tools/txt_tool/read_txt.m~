@@ -17,8 +17,7 @@ while 1
         all_imgs{count} = line(1:idx(end)-1);
         all_labels(count) = str2num(line(idx(end)+1:end));
     else
-        all_imgs{count} = line;
-        all_labels = 'NULL';
+        
     end
     count = count + 1;
 end

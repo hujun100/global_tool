@@ -17,10 +17,10 @@ clear;clc;
 use_mtcnn_v1 = false; 
 
 is_use_relative_path=1;
-img_dir='/home/brl/TRAIN/DataSet/morph2_complete/alignedTestList';
+img_dir='/home/brl/TRAIN/DataSet/morph2_complete/classPerFoler';
 
 is_write_5pt = 1;
-list_txt = '/home/brl/TRAIN/DataSet/morph2_complete/testList.txt';
+list_txt = '/home/brl/TRAIN/DataSet/morph2_complete/trainList.txt';
 
 is_save_mat = 0;
 mat_name = 'train-7k_lm_bbox_map.mat';
