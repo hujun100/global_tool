@@ -4,17 +4,31 @@ load('cacdvs_img_feature_map.mat');
 threshold = 0.4;
 fout = fopen('needDeleteList.txt','wt');
 allImgPaths = img_features_map.keys();
-newImgPaths = cell(length(allImgPaths), 1);
+all_class_labels = cell(length(allImgPaths), 1);
 for i = 1:length(allImgPaths)
     path = allImgPaths{i};
     idx = strfind(path, '_');
-    newImgPaths{i} = path(idx(1):idx(end));
+    all_class_labels{i} = path(idx(1):idx(end));
 end
-uImgPaths = unique(newImgPaths);
-uImgLen = length(uImgPaths);
-for i_u = 1:uImgLen
-    classIndexMap{i_u} = find(strcmp(newImgPaths, uImgPaths{i_u}));
+
+%%% type 1 for computing classIndexMap
+u_class_labels = unique(all_class_labels);
+u_class_len = length(u_class_labels);
+for i_u = 1:u_class_len
+    classIndexMap{i_u} = find(strcmp(all_class_labels, u_class_labels{i_u}));
 end
+%%% type 2 for computing classIndexMap
+% all_class_labels = sortrows(all_class_labels);
+% last_label = '';
+% count = 0;
+% for i_u = 1:length(all_class_labels)
+%     label = all_class_labels{i_u};
+%     if strcmp(last_label, label) ==0
+%          count = count + 1;
+%          classIndexMap{count}= [];
+%     end
+%     classIndexMap{count} = [classIndexMap{count} i_u];
+% end
 
 for i_u = 1:uImgLen
     i_u

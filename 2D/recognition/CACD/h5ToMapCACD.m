@@ -1,5 +1,5 @@
 clear;clc;
-h5_file = '/home/brl/PycharmProjects/crossAgeFR/reproductAE-CNN/cacdvs.h5';
+h5_file = '/home/brl/PycharmProjects/crossAgeFR/reproductAE-CNN/h5/cacdvs.h5';
 all_names = h5read(h5_file,'/name');
 all_features = h5read(h5_file, '/feature');
 

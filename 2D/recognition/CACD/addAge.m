@@ -1,7 +1,7 @@
-data = importdata('/home/brl/TRAIN/DataSet/CACD/DATA/cleanedTestImageOfCACD_with_label.txt');
+data = importdata('/home/brl/TRAIN/DataSet/cacd_and_morph/cleanedTestImageOfCACD_with_label.txt');
 allPaths = data.textdata;
 allLabel = data.data;
-labeled_list = '/home/brl/TRAIN/DataSet/CACD/DATA/cleanedTestImageOfCACD_with_label_age.txt';
+labeled_list = '/home/brl/TRAIN/DataSet/cacd_and_morph/cleanedTestImageOfCACD_with_label_age10.txt';
 fid = fopen(labeled_list, 'wt');
 allPathsLen = length(allPaths);
 allAge = zeros(allPathsLen, 1);
@@ -10,11 +10,9 @@ for i = 1: allPathsLen
     path = allPaths{i};
     age = path(1:2);
     allAge(i) = str2num(age);
-    label = floor(str2num(age)/5)-3;
-    if label == -1
-        label=0;
-    elseif label==9
-        label=8;
+    label = floor(str2num(age)/10)-1;
+    if label>=6
+        label=5;
     end
     fprintf(fid, '%s %d %d\n', path, allLabel(i), label); 
 end
