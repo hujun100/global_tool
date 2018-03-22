@@ -39,7 +39,7 @@ caffe.set_mode_gpu();
 all_imgs_file = importdata(all_imgs_ffp);
 if isfield(all_imgs_file,'textdata')
     all_labels = all_imgs_file.data;
-     all_imgs_file = all_imgs_file.textdata;
+    all_imgs_file = all_imgs_file.textdata;
 end
 % img_feature_map = all_imgs_file;
 img_feature_map = containers.Map();

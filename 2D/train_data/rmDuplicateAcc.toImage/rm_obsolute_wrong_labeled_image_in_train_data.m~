@@ -38,7 +38,7 @@ for i_u = 1:length(all_class_labels)
     classIndexMap{count} = [classIndexMap{count} i_u];
 end
 toc
-feature_dim = length(img_feature_map(allImgPaths{1}));
+feature_dim = length(img_feature_map(allImgPaths{1});
 for i_u = 1:length(classIndexMap)
     i_u
     allIndexPerClass = classIndexMap{i_u};
@@ -49,22 +49,18 @@ for i_u = 1:length(classIndexMap)
     end
     score_matrix = all_class_features * all_class_features';
     mean_score = mean(score_matrix, 1);
-    all_idx = find(mean_score < threshold);
-    for i_i = 1:length(all_idx)
-        idx = all_idx(i_i);
-        fprintf(fout, '%s\n', allImgPaths{allIndexPerClass(idx)});
+    [~, idx] = mean_score < threshold)
+    for i_a = 1:allIndexLen
+        testIndex = allIndexPerClass(i_a);
+        testIndexFeatures = img_feature_map(allImgPaths{testIndex});
+        score = [];
+        for i_b = 1:allIndexLen
+            tempFeatures = img_feature_map(allImgPaths{allIndexPerClass(i_b)});
+            score(i_b) = testIndexFeatures' * tempFeatures;
+        end
+        if mean(score) < threshold
+             fprintf(fout, '%s\n', allImgPaths{testIndex});
+        end
     end
-%     for i_a = 1:allIndexLen
-%         testIndex = allIndexPerClass(i_a);
-%         testIndexFeatures = img_feature_map(allImgPaths{testIndex});
-%         score = [];
-%         for i_b = 1:allIndexLen
-%             tempFeatures = img_feature_map(allImgPaths{allIndexPerClass(i_b)});
-%             score(i_b) = testIndexFeatures' * tempFeatures;
-%         end
-%         if mean(score) < threshold
-%              fprintf(fout, '%s\n', allImgPaths{testIndex});
-%         end
-%     end
 end
 fclose(fout);
