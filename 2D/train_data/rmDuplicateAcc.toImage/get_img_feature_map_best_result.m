@@ -5,8 +5,8 @@ caffe_path='~/github/caffe-ms/matlab';
 addpath(genpath(caffe_path));
 rank_n=50;
 %for ResNet
-img_dir = '/home/brl/TRAIN/DataSet/CASIA-WebFace-118x102/';
-all_imgs_ffp = '/home/brl/TRAIN/DataSet/webface_rm_dup.txt';
+img_dir = '/home/brl/TRAIN/DataSet/cacd_and_morph/morph_classPerFoler/';
+all_imgs_ffp = '/home/brl/TRAIN/DataSet/cacd_and_morph/morph_trainList.txt';
 
 
 prototxt = '/home/brl/TRAIN/best_result/train_file_v82/sphereface_deploy.prototxt';
@@ -49,7 +49,7 @@ for i = 1:length(all_imgs_file)
     features = extract_feature_single(img_dir, img_file, data_size,data_key, ...
         feature_key,net,preprocess_param,is_gray,norm_type,averageImg);
     features  = features/norm(features);
-    img_feature_map([img_file ' ' num2str(all_labels(i))]) = features;
+    img_feature_map(img_file) = features;
 end
 
 

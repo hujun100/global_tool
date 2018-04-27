@@ -17,15 +17,15 @@ clear;clc;
 use_mtcnn_v1 = false; 
 
 is_use_relative_path=1;
-img_dir='/home/brl/TRAIN/DataSet/morph2_complete/classPerFoler';
+img_dir='/home/brl/BRL/image/probe';
 
 is_write_5pt = 1;
-list_txt = '/home/brl/TRAIN/DataSet/morph2_complete/trainList.txt';
+list_txt = '/home/brl/BRL/image/probe.txt';
 
 is_save_mat = 0;
 mat_name = 'train-7k_lm_bbox_map.mat';
 
-caffe_path='/home/brl/github/caffe-ms/matlab';
+caffe_path='~/github/caffe-ms/matlab';
 
 is_write_detected_face = false; %if true,you should change the code
 

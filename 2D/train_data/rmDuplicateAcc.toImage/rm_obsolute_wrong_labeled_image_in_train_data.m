@@ -1,14 +1,14 @@
 % clc;clear;
 % load('cacd_img_feature_map.mat');
 % load('cacdvs_img_feature_map.mat');
-threshold = 0.3;
+threshold = 0.4;
 fout = fopen('needDeleteList.txt','wt');
 allImgPaths = img_feature_map.keys();
 all_class_labels = cell(length(allImgPaths), 1);
 for i = 1:length(allImgPaths)
     path = allImgPaths{i};
-    idx = strfind(path, ' ');
-    all_class_labels{i} = path(idx(1) + 1:end);
+    idx = strfind(path, '/');
+    all_class_labels{i} = path(1:idx(1));
 end
 
 classIndexMap = {};

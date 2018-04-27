@@ -1,7 +1,7 @@
 clear;clc;
 data = importdata('/home/brl/TRAIN/DataSet/cacd_and_morph/morph_trainList.txt');
-fid = fopen('/home/brl/TRAIN/DataSet/cacd_and_morph/trainList_with_label_age_10.txt', 'wt');
-class_label_count = 1979;
+fid = fopen('/home/brl/TRAIN/DataSet/cacd_and_morph/trainList_with_label_age_10_only_morph.txt', 'wt');
+class_label_count = -1;
 last_class = '';
 for i = 1:length(data)
     i

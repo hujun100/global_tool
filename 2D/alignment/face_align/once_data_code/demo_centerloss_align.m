@@ -11,14 +11,14 @@ clear;
 %         3. the images should be stored as  root_dir/class/image
 %Jun Hu
 %2017-4
-face_dir='/home/brl/TRAIN/DataSet/morph2_complete/classPerFoler';
+face_dir='/home/brl/BRL/image/probe_wrapper';
 ffp_dir=face_dir;
-save_dir='/home/brl/TRAIN/DataSet/morph2_complete/alignedTrainList';
-is_train = 1; %% if true, get (112+6)x(96+6) size images, else 112x96
+save_dir='/home/brl/BRL/image/aligned_probe';
+is_train = false; %% if true, get (112+6)x(96+6) size images, else 112x96
 conf_threshold = 0;
 % save_dir='/home/scw4750/github/IJCB2017/liangjie/croped/with_pts/enlarge_mulitpie_croped_by_liang_with_pts/gallery';
 pts_format='5pt';
-filter='*.JPG';
+filter='*.jpg';
 is_continue=true; %when landmarks does not exist or is not correct,choose whether to continue;
 centerloss_align(face_dir, ffp_dir, save_dir,filter,pts_format,conf_threshold, is_continue, is_train);
 

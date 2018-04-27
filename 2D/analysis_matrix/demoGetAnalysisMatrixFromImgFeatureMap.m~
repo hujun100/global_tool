@@ -1,0 +1,60 @@
+clear;
+addpath(genpath('~/github/global_tool'));
+load('brl_image.mat');
+rank_n=50;
+
+probe_txt='/home/brl/BRL/image/probe.txt';
+gallery_txt='/home/brl/BRL/image/gallery.txt';
+featureDim = 1024;
+
+gallery = get_name_label_by_txt(gallery_txt);
+probe = get_name_label_by_txt(probe_txt);
+galLen = length(gallery);
+proLen = length(probe);
+
+allGalFeatures = zeros(featureDim, galLen);
+allProFeatures = zeros(proLen, featureDim);
+
+for i = 1:galLen
+    allGalFeatures(:,i) = img_feature_map(gallery(i).name); 
+end
+for i = 1:proLen
+    allProFeatures(i,:) = img_feature_map(probe(i).name); 
+end
+distanceMatrix = allProFeatures * allGalFeatures;
+analysis.distance_matrix = distanceMatrix;
+analysis.gallery_info = gallery;
+analysis.probe_info = probe;
+
+rankParam.rank_n = 50;
+rankScore = compute_cmc_by_analysis_matrix(analysis, rankParam)
+
+%%% get wrong example
+distance=analysis.distance_matrix;
+[~,index]=sort(distance,2,'descend');
+rank_count=zeros(rank_n,1);
+gallery=analysis.gallery_info;
+probe=analysis.probe_info;
+for i_p=1:size(distance,1)
+    has_pinned=0;
+    if probe(i_p).label ~=gallery(index(i_p, 1)).label
+       subplot(3,1,1);
+       imshow(imread(probe(i_p).name));
+       subplot(3,1,2);
+       imshow(imread(probe(i_p).name));
+    end
+end
+rank_score=rank_count/size(distance,1);
+
+
+
+
+function result=get_name_label_by_txt(txt)
+fid=fopen(txt,'rt');
+list=textscan(fid,'%s %f');
+fclose(fid);
+for i_g=1:length(list{1})
+    result(i_g).name=list{1,1}{i_g};
+    result(i_g).label=list{1,2}(i_g);
+end
+end

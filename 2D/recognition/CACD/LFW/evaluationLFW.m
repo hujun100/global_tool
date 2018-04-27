@@ -1,3 +1,4 @@
+
 % --------------------------------------------------------
 % Copyright (c) Weiyang Liu, Yandong Wen
 % Licensed under The MIT License [see LICENSE for details]
@@ -15,7 +16,7 @@
 clear;clc;close all;
 test_data_dir = '/home/brl/PycharmProjects/crossAgeFR/lfw_evaluation/alignedLFW';
 
-h5_file = '/home/brl/PycharmProjects/crossAgeFR/reproductAE-CNN/h5/lfw.h5';
+h5_file = '/home/brl/PycharmProjects/crossAgeFR/reproduce-LF-CNN/h5/lfw.h5';
 all_names = h5read(h5_file,'/name');
 all_features = h5read(h5_file,'/feature');
 for i = 1:length(all_names)
@@ -29,9 +30,9 @@ pairs = parseList('pairs.txt', test_data_dir);
 for i = 1:length(pairs)
     fprintf('extracting deep features from the %dth face pair...\n', i);
     idx = find(strcmp(all_names, pairs(i).fileL));
-    pairs(i).featureL = all_features(:,idx);
+    pairs(i).featureL = all_features(:, idx);
     idx = find(strcmp(all_names, pairs(i).fileR));
-    pairs(i).featureR = all_features(:,idx);
+    pairs(i).featureR = all_features(:, idx);
 end
 %%save result/pairs.mat pairs
 

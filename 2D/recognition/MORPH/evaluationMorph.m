@@ -1,4 +1,3 @@
-33
 % clear;
 % img_feature_map = img_features_map;
 addpath(genpath('~/github/global_tool'));
