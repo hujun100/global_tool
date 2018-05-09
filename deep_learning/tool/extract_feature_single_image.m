@@ -138,16 +138,17 @@ if norm_type==2
     net.blobs(data_key).set_data(cropImg);
     net.forward_prefilled();
     res = net.blobs(feature_key).get_data();
-    net.blobs(data_key).set_data(cropImg_);
-    net.forward_prefilled();
-    res_=net.blobs(feature_key).get_data();
-    feature = [res; res_];
-%     feature = res;
+%     net.blobs(data_key).set_data(cropImg_);
+%     net.forward_prefilled();
+%     res_=net.blobs(feature_key).get_data();
+%     feature = [res; res_];
+    feature = res;
 %    feature = res + res_;
 else
     if is_gray
         if size(img,3)==3
             img=uint8(img);
+            %img = img(:,:,3);
             img=rgb2gray(img);
         end
     else
@@ -169,7 +170,7 @@ else
         data = zeros(img_size(2),img_size(1),1,1);
         data = single(data);
         if norm_type==0
-            data(:,:,:,1) = (single(img)/255.0);
+            data(:,:,:,1) = ((single(img) - 1)/255.0);
         elseif norm_type==1
             data(:,:,:,1) = (single(img)-averageImg(1));
         elseif norm_type==2

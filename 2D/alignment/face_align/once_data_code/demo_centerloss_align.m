@@ -11,9 +11,9 @@ clear;
 %         3. the images should be stored as  root_dir/class/image
 %Jun Hu
 %2017-4
-face_dir='/home/brl/BRL/image/probe_wrapper';
+face_dir='/home/brl/BRL/image/test';
 ffp_dir=face_dir;
-save_dir='/home/brl/BRL/image/aligned_probe';
+save_dir='/home/brl/BRL/image/test_align';
 is_train = false; %% if true, get (112+6)x(96+6) size images, else 112x96
 conf_threshold = 0;
 % save_dir='/home/scw4750/github/IJCB2017/liangjie/croped/with_pts/enlarge_mulitpie_croped_by_liang_with_pts/gallery';

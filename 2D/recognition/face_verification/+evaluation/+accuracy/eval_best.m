@@ -2,7 +2,7 @@
 %  All rights reserved.
 %  This code is made available under the terms of the BSD license (see COPYING file).
 
-function [res, extra] = eval_best(scores, gt, interval)
+function [res, bestThresh] = eval_best(scores, gt, interval)
     
 if nargin==2
   interval = 1;
@@ -12,11 +12,11 @@ end
     % threshold scores and get the sign
     gt(gt==0)=-1;
     res = -Inf;
-    extra.bestThresh = [];
+    bestThresh = [];
     
     % thresh loop
     for i=1:interval:numel(scores)
-         
+         i
         curThresh = scores(i);
         class = 2 * (scores >= curThresh) - 1;
         
@@ -26,7 +26,7 @@ end
         if acc > res
             
             res = acc;
-            extra.bestThresh = curThresh;            
+            bestThresh = curThresh;            
         end
     end
     

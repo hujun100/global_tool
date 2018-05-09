@@ -10,8 +10,6 @@ end
 fclose(fid);
 
 
-
-
 function all_lines = read_list(ffp)
 fid = fopen(ffp);
 tline = fgetl(fid);
