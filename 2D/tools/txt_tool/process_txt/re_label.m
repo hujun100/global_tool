@@ -2,9 +2,9 @@
 %
 % clc;clear;
 addpath(genpath('~/github/global_tool'));
-[all_imgs, all_labels] = read_txt('/home/brl/TRAIN/DataSet/webface_rm_dup_clean_wrong_example_10566.txt');
+[all_imgs, all_labels] = read_txt('/home/brl/TRAIN/DataSet/webface_rm_dup_clean_wrong_example_final_30.txt');
 
-fid = fopen('/home/brl/TRAIN/DataSet/webface_rm_dup_clean_wrong_example_final.txt','wt');
+fid = fopen('/home/brl/TRAIN/DataSet/webface_rm_dup_clean_wrong_example_final_300_5.txt','wt');
 tic
 all_class_index = get_class_index(all_labels);
 toc

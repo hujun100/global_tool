@@ -17,10 +17,10 @@ clear;clc;
 use_mtcnn_v1 = false;
 
 is_use_relative_path=1;
-img_dir='/home/brl/TRAIN/downloaded/';
+img_dir='/home/brl/megaface_help/facescrub_3530/';
 
 is_write_5pt = 1;
-list_txt = '/home/brl/TRAIN/facescrub.txt';
+list_txt = '/home/brl/megaface_help/facescrub.txt';
 failedDetect = 'failedDecect.txt';
 caffe_path='/home/brl/github/caffe-ms/matlab';
 

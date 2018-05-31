@@ -15,8 +15,8 @@ while 1
     tline = fgetl(fid);
     if ~ischar(tline), break, end;
     tline_split = regexp(tline, ' ', 'split');
-    if mod(cou, 6) ==6 || mod(cou,6) == 0
-        assert(length(tline_split) == 4, 'bbox in 5pt is wrong');
+    if mod(cou,6) == 0
+        assert(length(tline_split) == 5, 'bbox in 5pt is wrong');
         for i_b = 1:4
             bbox(bbox_cou, i_b) = str2double(tline_split{i_b});
         end

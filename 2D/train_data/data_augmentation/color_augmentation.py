@@ -54,7 +54,7 @@ def randomOrder(image):
   return image
 
 ##this method will harm the performance
-def mod_RGB(img, var=0.2):
+def mod_RGB(img, var=0.5):
     ratio = np.random.uniform(-var, var,size=(3,1))
     for channel in range(3):
         img[:, :, channel] = img[:, :, channel] * (1.0 + ratio[channel])
@@ -126,7 +126,7 @@ if __name__ == '__main__':
   plt.imshow(brightnessout)
 
   plt.subplot(1, 4, 4)
-  contrastout = pre_process(img)
+  contrastout = mod_RGB(img)
 
   plt.imshow(contrastout)
   plt.show()

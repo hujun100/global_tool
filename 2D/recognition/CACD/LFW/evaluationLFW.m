@@ -22,7 +22,7 @@ all_features = h5read(h5_file,'/feature');
 for i = 1:length(all_names)
     name = all_names{i};
     idx = strfind(name,'jpg');
-    all_names{i} = name(1:idx(1)+2); 
+    all_names{i} = name(1:idx(1)+2);
 end
 %% compute features
 

@@ -17,10 +17,10 @@ clear;clc;
 use_mtcnn_v1 = false; 
 
 is_use_relative_path=1;
-img_dir='/home/brl/BRL/image/test';
+img_dir='/home/brl/megaface_help/facescrub_3530/';
 
-is_write_5pt = 1;
-list_txt = '/home/brl/BRL/image/test.txt';
+is_write_5pt = false;
+list_txt = '/home/brl/megaface_help/facescrub.txt';
 
 is_save_mat = 0;
 mat_name = 'train-7k_lm_bbox_map.mat';
